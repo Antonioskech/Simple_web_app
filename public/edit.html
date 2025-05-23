@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script>
+    function validateProfileForm() {
+      const firstName = document.forms["profileForm"]["first_name"].value.trim();
+      const lastName = document.forms["profileForm"]["last_name"].value.trim();
+      const password = document.forms["profileForm"]["password"].value;
+      const confirmPassword = document.forms["profileForm"]["confirm_password"].value;
+
+      if (!firstName || !lastName) {
+        alert("First name and last name are required.");
+        return false;
+      }
+
+      if (password !== "" && password.length < 6) {
+        alert("New password must be at least 6 characters.");
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Edit Profile</h2>
+    <form name="profileForm" method="POST" action="/edit" onsubmit="return validateProfileForm()">
+      <label for="first_name">First Name:</label><br />
+      <input type="text" id="first_name" name="first_name" required /><br /><br />
+
+      <label for="last_name">Last Name:</label><br />
+      <input type="text" id="last_name" name="last_name" required /><br /><br />
+
+      <label for="password">New Password:</label><br />
+      <input type="password" id="password" name="password" /><br /><br />
+
+      <label for="confirm_password">Confirm New Password:</label><br />
+      <input type="password" id="confirm_password" name="confirm_password" /><br /><br />
+
+      <button type="submit" class="button">Save Changes</button>
+    </form>
+  </div>
+</body>
+</html>

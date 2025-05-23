@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Successful</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .action-button {
+      padding: 12px 24px;
+      background-color: #5e60ce;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 160px;
+    }
+
+    .action-button:hover {
+      background-color: #4b4fd6;
+    }
+  </style>
+</head>
+<body>
+  <h1>✅ Login Successful!</h1>
+
+  <div class="button-container">
+    <form action="/logout" method="POST">
+      <button type="submit" class="action-button">Logout</button>
+    </form>
+
+    <form action="/edit" method="get">
+      <button type="submit" class="action-button">Edit Profile</button>
+    </form>
+  </div>
+</body>
+</html>

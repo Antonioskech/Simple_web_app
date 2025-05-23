@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script>
+    function validateForm() {
+      const email = document.forms["loginForm"]["email"].value.trim();
+      const password = document.forms["loginForm"]["password"].value;
+
+      if (!email || !password) {
+        alert("Please fill out all fields.");
+        return false;
+      }
+
+      if (!email.match(/^\S+@\S+\.\S+$/)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+
+      return true;
+    }
+
+    // Проверка за грешка от сървъра
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('error') === '1') {
+        alert("Invalid email or password.");
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form name="loginForm" method="POST" action="/login" onsubmit="return validateForm()">
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <br><br>
+
+      <!-- Password -->
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <br><br>
+
+      <button type="submit" class="button">Login</button>
+    </form>
+  </div>
+</body>
+</html>
