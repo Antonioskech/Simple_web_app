@@ -7,9 +7,9 @@ const path = require('path');
 // Enter your database you want to use
 const dbConfig = {
   host: 'localhost',
-  user: 'root',
-  password: 'Yasuomainishere123!',
-  database: 'usersdb',
+  user: 'YourRoot',
+  password: 'Your database password!',
+  database: 'your database name',
 };
 
 // Parsing functions for cookies
@@ -298,7 +298,7 @@ function validateProfileEdit(data) {
       return 'New password must be at least 6 characters';
     }
   }
-  
+
   if (password !== confirm_password) {
       return 'Passwords do not match';
   }
