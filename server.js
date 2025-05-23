@@ -1,3 +1,4 @@
+require('dotenv').config();
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -15,18 +16,18 @@ const {
 // DB config for profile fetch
 const dbConfig = {
   host: 'localhost',
-  user: 'root',
-  password: 'Yasuomainishere123!',
-  database: 'usersdb',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 };
 
-// Проверка дали потребител е логнат чрез сесия
+// Check if a user is logged in using sessions
 function isAuthenticated(req) {
   const cookies = parseCookies(req);
   return cookies.sessionId && sessions[cookies.sessionId];
 }
 
-// Служебна функция за статични файлове
+// Utility function for static files
 function serveStaticFile(res, filePath, contentType) {
   fs.readFile(filePath, (err, data) => {
     if (err) {
@@ -38,7 +39,7 @@ function serveStaticFile(res, filePath, contentType) {
   });
 }
 
-// Динамично сервиране на edit.html с попълнени данни
+// Dynamic serving of edit.html with pre-filled data
 async function serveEditPage(req, res) {
   const cookies = parseCookies(req);
   const session = sessions[cookies.sessionId];
@@ -79,7 +80,7 @@ async function serveEditPage(req, res) {
   }
 }
 
-// Създаване на сървъра
+// Creating the server
 const server = http.createServer((req, res) => {
   const { method, url } = req;
   const parsedUrl = new URL(url, `http://${req.headers.host}`);
@@ -150,8 +151,8 @@ const server = http.createServer((req, res) => {
   }
 });
 
-// Стартиране на сървъра
-const PORT = 3000;
+// start the server
+const PORT = process.env.PORT;
 server.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}/`);
 });

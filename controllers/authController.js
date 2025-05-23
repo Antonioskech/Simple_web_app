@@ -7,9 +7,9 @@ const path = require('path');
 // Enter your database you want to use
 const dbConfig = {
   host: 'localhost',
-  user: 'YourRoot',
-  password: 'Your database password!',
-  database: 'your database name',
+  user: 'root',
+  password: 'Yasuomainishere123!',
+  database: 'usersdb',
 };
 
 // Parsing functions for cookies
@@ -117,6 +117,7 @@ async function loginUser(req, res) {
       return serveLoginWithError(res, 'Invalid email or password.');
     }
 
+    //user is logged in => start a session
     const sessionId = generateSessionId();
     sessions[sessionId] = { email: user.email, userId: user.id };
 
@@ -168,7 +169,7 @@ function logoutUser(req, res) {
   res.end();
 }
 
-// ========== NEW: Get User Profile ==========
+
 async function getUserProfile(userId) {
   try {
     const connection = await mysql.createConnection(dbConfig);
@@ -190,6 +191,7 @@ async function getUserProfile(userId) {
 // Update profile function
 async function updateProfile(req, res, sessions) {
   try {
+    //if is logged in, then proceed to edit profile
     const cookies = parseCookies(req);
     const sessionId = cookies.sessionId;
     if (!sessionId || !sessions[sessionId]) {
@@ -223,6 +225,7 @@ async function updateProfile(req, res, sessions) {
 
     const connection = await mysql.createConnection(dbConfig);
 
+    //write to database the new information
     if (password && password.length > 0) {
       const hashedPassword = await bcrypt.hash(password, 10);
       await connection.execute(
@@ -252,7 +255,7 @@ async function updateProfile(req, res, sessions) {
 function validateRegistration(data) {
   const { first_name, last_name, email, password, confirm_password } = data;
 
-  /* If you want to see the values, uncomment this
+  /* If you want to see the values when unit testing, uncomment this
   console.log(data.first_name);
   console.log(data.last_name);
   console.log(data.email);
@@ -282,7 +285,7 @@ function validateRegistration(data) {
 function validateProfileEdit(data) {
   const { first_name, last_name, password, confirm_password } = data;
 
-  /* If you want to see the values, uncomment this
+  /* If you want to see the values when unit testing, uncomment this
   console.log(data.first_name);
   console.log(data.last_name);
   console.log(data.password);
@@ -309,7 +312,7 @@ function validateProfileEdit(data) {
 function validateLoginInput(data) {
   const {email, password} = data;
 
-  /* If you want to see the values, uncomment this
+  /* If you want to see the values when unit testing, uncomment this
   console.log(data.email);
   console.log(data.password);
   */
@@ -321,7 +324,7 @@ function validateLoginInput(data) {
     return 'password too short';
   }
 
-  return null;
+  return null; //Valid
 }
 
 module.exports = {
