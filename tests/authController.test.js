@@ -20,7 +20,7 @@ function assertEqual(actual, expected) {
   }
 }
 
-// === Registration Tests ===
+// Register validation
 
 test('validateRegistration - valid input', () => {
   assertEqual(validateRegistration({
