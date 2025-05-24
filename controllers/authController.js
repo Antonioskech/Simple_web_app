@@ -7,9 +7,9 @@ const path = require('path');
 // Enter your database you want to use
 const dbConfig = {
   host: 'localhost',
-  user: 'root',
-  password: 'Yasuomainishere123!',
-  database: 'usersdb',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 };
 
 // Parsing functions for cookies
