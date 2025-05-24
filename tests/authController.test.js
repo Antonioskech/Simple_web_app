@@ -102,7 +102,7 @@ test('validateRegistration - confirm_password empty', () => {
   }), 'Passwords do not match');
 });
 
-// === Profile Edit Tests ===
+//Edit profile validations
 
 test('validateProfileEdit - missing names', () => {
   assertEqual(validateProfileEdit({
@@ -167,7 +167,7 @@ test('validateProfileEdit - valid with password change', () => {
   }), null);
 });
 
-// === Login Input Tests ===
+//Login input validations
 
 test('validateLoginInput - valid input', () => {
   assertEqual(validateLoginInput({
