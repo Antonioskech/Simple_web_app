@@ -33,6 +33,7 @@
         alert("Please enter a valid email address.");
         return false;
       }
+      //TODO alert if email is already in db
       if (password.length < 6) {
         alert("Password must be at least 6 characters.");
         return false;
@@ -48,6 +49,18 @@
       return true;
     }
   </script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("alreadyExist") === "true") {
+      const errorMessage = document.createElement("p");
+      errorMessage.textContent = "That email is already registered.";
+      errorMessage.style.color = "red";
+      errorMessage.style.marginTop = "10px";
+      document.querySelector("form").prepend(errorMessage);
+    }
+  });
+</script>
     <style>
     .main {
       max-width:300px;

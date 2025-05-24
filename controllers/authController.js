@@ -69,9 +69,9 @@ async function registerUser(req, res) {
 
     const [rows] = await connection.execute('SELECT id FROM users WHERE email = ?', [email]);
     if (rows.length > 0) {
-      res.writeHead(400, { 'Content-Type': 'text/plain' });
       await connection.end();
-      return res.end('Email already registered');
+      res.writeHead(302, { Location: '/register.html?alreadyExist=true' });
+      return res.end();              
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
